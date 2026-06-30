@@ -10,7 +10,13 @@ app.use(cors())
 
 
 
-
+app.post("/",(req,res)=>{
+    try {
+        
+    } catch (error) {
+        
+    }
+})
 
 
 
