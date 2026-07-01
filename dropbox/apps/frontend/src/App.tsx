@@ -1,19 +1,29 @@
-import React, { useState } from "react";
-import { FileUploader } from "react-drag-drop-files";
-import './App.css'
+import { Routes, Route, Navigate } from "react-router-dom";
 
-
-const fileTypes = ["JPG", "PNG", "PDF","DOCX","DOC"];
+import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
+import Upload from "./pages/Upload";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
-  
-  const [file, setFile] = useState(null);
-  const handleChange = (file) => {
-    setFile(file);
-  };
   return (
-    <FileUploader handleChange={handleChange} name="file" types={fileTypes} />
+    <Routes>
+      <Route path="/" element={<Navigate to="/signup" replace />} />
+      {/* Public routes */}
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/signin" element={<SignIn />} />
+
+      {/* Protected routes */}
+      <Route
+        path="/upload"
+        element={
+          <ProtectedRoute>
+            <Upload />
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
   );
 }
 
-export default App
+export default App;
